@@ -14,6 +14,7 @@ def pochvala(pocet):
 
 def hra():
     ODDELOVAC = 47 * "-"
+    #Vytvoření náhodného listu čísel
     list_cisel = [random.randint(1, 9)]
     while len(list_cisel) != 4:
         pridane = random.randint(0, 9)
@@ -29,6 +30,23 @@ def hra():
         print(f"xxx Tip: {pocet_pokusu} xxx")
         print("Please enter 4 digit number: ")
         tip = [int(cislo) for cislo in str(input())]
+
+        while len(tip) != len(list_cisel):
+            print("Please enter exactly 4 digit number!")
+            tip = [int(cislo) for cislo in str(input())]
+
+        while tip[0] == 0:
+            print("First number cannot be 0")
+            tip = [int(cislo) for cislo in str(input())]
+
+        kontrola_cisel = []
+        for i in tip:
+            if i not in kontrola_cisel:
+                kontrola_cisel.append(i)
+        if len(kontrola_cisel) != len(list_cisel):
+            print("Numbers must be unique (no duplicates)")
+            tip = [int(cislo) for cislo in str(input())]
+
 
         if tip == list_cisel:
             t1 = time.time() - t0
@@ -51,6 +69,4 @@ def hra():
 
     print(f"That's {pochvala(pocet_pokusu)}")
     print(f"It took you {int(t1)}s to accomplish")
-
-hra()
-
+    time.sleep(10)
